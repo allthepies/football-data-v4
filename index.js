@@ -39,7 +39,7 @@ class FootballData {
     }
 
     teamMatches(id,{dateFrom, dateTo, status, venue} = {}) {
-        return this.instance.get(`/teams/${id}/matches${querystring.stringify({dateFrom, dateTo, status, venue})}`)
+        return this.instance.get(`/teams/${id}/matches?${querystring.stringify({dateFrom, dateTo, status, venue})}`)
     }
 
     team(id) {
