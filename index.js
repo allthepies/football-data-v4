@@ -22,7 +22,7 @@ class FootballData {
         return this.instance.get(`/competitions/${competitionId}/teams?${querystring.stringify({season, stage})}`)
     }
 
-    standings(competitionId, {standingType} = {'TOTAL'}) {
+    standings(competitionId, {standingType} = {}) {
         return this.instance.get(`/competitions/${competitionId}/standings?${querystring.stringify({standingType})}`)
     }
     
@@ -58,7 +58,7 @@ class FootballData {
         return this.instance.get(`/players/${id}/matches?${querystring.stringify({competitions, dateFrom, dateTo, status, limit})}`)
     }
 
-    scorers(competitionId, competitionId, {limit} = {10}) {
+    scorers(competitionId, {limit} = {}) {
         return this.instance.get(`/competitions/${competitionId}/scorers?${querystring.stringify({limit})}`)
     }
 
