@@ -58,8 +58,8 @@ class FootballData {
         return this.instance.get(`/players/${id}/matches?${querystring.stringify({competitions, dateFrom, dateTo, status, limit})}`)
     }
 
-    scorers(competitionId, {limit} = {}) {
-        return this.instance.get(`/competitions/${competitionId}/scorers?${querystring.stringify({limit})}`)
+    scorers(competitionId, {limit,season} = {}) {
+        return this.instance.get(`/competitions/${competitionId}/scorers?${querystring.stringify({limit,season})}`)
     }
 
 	
