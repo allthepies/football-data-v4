@@ -5,12 +5,17 @@ class FootballData {
     constructor(token) {
         this.instance = axios.create({
             baseURL: 'http://api.football-data.org/v2/',
-             timeout: 1000,
-            headers: { 'X-Auth-Token': token }
+            timeout: 1000,
+            headers: {
+                'X-Auth-Token': token
+            }
         });
     }
 
-    competitions({area, plan} = {}) {
+    competitions({
+        area,
+        plan
+    } = {}) {
         return this.instance.get(`/competitions?${querystring.stringify({areas: area, plan})}`)
     }
 
@@ -18,19 +23,38 @@ class FootballData {
         return this.instance.get(`/competitions/${competitionId}`)
     }
 
-    teams(competitionId, {season, stage} = {}) {
+    teams(competitionId, {
+        season,
+        stage
+    } = {}) {
         return this.instance.get(`/competitions/${competitionId}/teams?${querystring.stringify({season, stage})}`)
     }
 
-    standings(competitionId, {standingType} = {}) {
-        return this.instance.get(`/competitions/${competitionId}/standings?${querystring.stringify({standingType})}`)
+    standings(competitionId, {
+        standingType,
+        season
+    } = {}) {
+        return this.instance.get(`/competitions/${competitionId}/standings?${querystring.stringify({standingType, season})}`)
     }
-    
-    competitionMatches(competitionId, {dateFrom, dateTo, stage, status, matchday, group, season} = {}) {
+
+    competitionMatches(competitionId, {
+        dateFrom,
+        dateTo,
+        stage,
+        status,
+        matchday,
+        group,
+        season
+    } = {}) {
         return this.instance.get(`/competitions/${competitionId}/matches?${querystring.stringify({dateFrom, dateTo, stage, status, matchday, group, season})}`)
     }
 
-    matches({competitions, dateFrom, dateTo, status} = {}) {
+    matches({
+        competitions,
+        dateFrom,
+        dateTo,
+        status
+    } = {}) {
         return this.instance.get(`/matches?${querystring.stringify({competitions, dateFrom, dateTo, status})}`)
     }
 
@@ -38,7 +62,13 @@ class FootballData {
         return this.instance.get(`/matches/${id}`)
     }
 
-    teamMatches(id,{dateFrom, dateTo, status, venue, limit} = {}) {
+    teamMatches(id, {
+        dateFrom,
+        dateTo,
+        status,
+        venue,
+        limit
+    } = {}) {
         return this.instance.get(`/teams/${id}/matches?${querystring.stringify({dateFrom, dateTo, status, venue, limit})}`)
     }
 
@@ -54,15 +84,24 @@ class FootballData {
         return this.instance.get(`/player/${id}`)
     }
 
-    playerMatches(id,{competitions, dateFrom, dateTo, status, limit} = {}) {
+    playerMatches(id, {
+        competitions,
+        dateFrom,
+        dateTo,
+        status,
+        limit
+    } = {}) {
         return this.instance.get(`/players/${id}/matches?${querystring.stringify({competitions, dateFrom, dateTo, status, limit})}`)
     }
 
-    scorers(competitionId, {limit,season} = {}) {
+    scorers(competitionId, {
+        limit,
+        season
+    } = {}) {
         return this.instance.get(`/competitions/${competitionId}/scorers?${querystring.stringify({limit,season})}`)
     }
 
-	
+
 }
 
 module.exports = FootballData;
