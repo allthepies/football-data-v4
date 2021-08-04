@@ -2,10 +2,10 @@ const axios = require('axios');
 const querystring = require('querystring');
 
 class FootballData {
-    constructor(token) {
+    constructor(token, timeout = 1000) {
         this.instance = axios.create({
             baseURL: 'http://api.football-data.org/v2/',
-            timeout: 1000,
+            timeout: timeout,
             headers: {
                 'X-Auth-Token': token
             }
@@ -31,10 +31,9 @@ class FootballData {
     }
 
     standings(competitionId, {
-        standingType,
-        season
+        standingType
     } = {}) {
-        return this.instance.get(`/competitions/${competitionId}/standings?${querystring.stringify({standingType, season})}`)
+        return this.instance.get(`/competitions/${competitionId}/standings?${querystring.stringify({standingType})}`)
     }
 
     competitionMatches(competitionId, {
