@@ -15,6 +15,21 @@ const httpsKeepAliveAgent = new Agent({
     freeSocketTimeout: 30000, // free socket keepalive for 30 seconds
 });
 
+
+function deleteEmptyParams(query) {
+
+    for (const param in query) {
+
+        if (query[param] === undefined /* In case of undefined assignment */ ||
+            query[param] === null ||
+            query[param] === "") {
+            delete query[param];
+        }
+    }
+
+    return query;
+}
+
 class FootballData {
 
     constructor(token, timeout = 1000) {
@@ -33,10 +48,10 @@ class FootballData {
         area,
         plan
     } = {}) {
-        const searchParams = new URLSearchParams({
+        const searchParams = new URLSearchParams(deleteEmptyParams({
             areas: area,
             plan
-        });
+        }));
         return this.instance.get(`/competitions?${searchParams.toString()}`)
     }
 
@@ -48,19 +63,19 @@ class FootballData {
         season,
         stage
     } = {}) {
-        const searchParams = new URLSearchParams({
+        const searchParams = new URLSearchParams(deleteEmptyParams({
             season,
             stage
-        });
+        }));
         return this.instance.get(`/competitions/${competitionId}/teams?${searchParams.toString()}`)
     }
 
     standings(competitionId, {
         standingType
     } = {}) {
-        const searchParams = new URLSearchParams({
+        const searchParams = new URLSearchParams(deleteEmptyParams({
             standingType
-        });
+        }));
         return this.instance.get(`/competitions/${competitionId}/standings?${searchParams.toString()}`)
     }
 
@@ -73,7 +88,7 @@ class FootballData {
         group,
         season
     } = {}) {
-        const searchParams = new URLSearchParams({
+        const searchParams = new URLSearchParams(deleteEmptyParams({
             dateFrom,
             dateTo,
             stage,
@@ -81,7 +96,7 @@ class FootballData {
             matchday,
             group,
             season
-        });
+        }));
         return this.instance.get(`/competitions/${competitionId}/matches?${searchParams.toString()}`)
     }
 
@@ -91,12 +106,12 @@ class FootballData {
         dateTo,
         status
     } = {}) {
-        const searchParams = new URLSearchParams({
+        const searchParams = new URLSearchParams(deleteEmptyParams({
             competitions,
             dateFrom,
             dateTo,
             status
-        });
+        }));
         return this.instance.get(`/matches?${searchParams.toString()}`)
     }
 
@@ -111,13 +126,13 @@ class FootballData {
         venue,
         limit
     } = {}) {
-        const searchParams = new URLSearchParams({
+        const searchParams = new URLSearchParams(deleteEmptyParams({
             dateFrom,
             dateTo,
             status,
             venue,
             limit
-        });
+        }));
         return this.instance.get(`/teams/${id}/matches?${searchParams.toString()}`)
     }
 
@@ -140,13 +155,13 @@ class FootballData {
         status,
         limit
     } = {}) {
-        const searchParams = new URLSearchParams({
+        const searchParams = new URLSearchParams(deleteEmptyParams({
             competitions,
             dateFrom,
             dateTo,
             status,
             limit
-        });
+        }));
         return this.instance.get(`/players/${id}/matches?${searchParams.toString()}`)
     }
 
@@ -154,10 +169,10 @@ class FootballData {
         limit,
         season
     } = {}) {
-        const searchParams = new URLSearchParams({
+        const searchParams = new URLSearchParams(deleteEmptyParams({
             limit,
             season
-        });
+        }));
         return this.instance.get(`/competitions/${competitionId}/scorers?${searchParams.toString()}`)
     }
 
