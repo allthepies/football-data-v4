@@ -1,6 +1,6 @@
 {
   "name": "football-data-v2",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "JS Api for using football-data.org rest api",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/dorraba/football-data-v2#readme",
   "dependencies": {
-    "axios": "^0.18.0",
-    "querystring": "^0.2.0"
+    "agentkeepalive": "^4.1.4",
+    "axios": "^0.22.0"
   }
 }
