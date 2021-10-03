@@ -4,15 +4,15 @@ const Agent = require('agentkeepalive');
 const httpKeepAliveAgent = new Agent({
     maxSockets: 100,
     maxFreeSockets: 10,
-    timeout: 60000, // active socket keepalive for 60 seconds
-    freeSocketTimeout: 30000, // free socket keepalive for 30 seconds
+    timeout: 40000, // active socket keepalive for 60 seconds
+    freeSocketTimeout: 20000, // free socket keepalive for 30 seconds
 });
 
 const httpsKeepAliveAgent = new Agent({
     maxSockets: 100,
     maxFreeSockets: 10,
-    timeout: 60000, // active socket keepalive for 60 seconds
-    freeSocketTimeout: 30000, // free socket keepalive for 30 seconds
+    timeout: 40000, // active socket keepalive for 60 seconds
+    freeSocketTimeout: 20000, // free socket keepalive for 30 seconds
 });
 
 
@@ -29,6 +29,13 @@ function deleteEmptyParams(query) {
 
     return query;
 }
+
+function requestParams(params) {
+
+    const searchParams = new URLSearchParams(deleteEmptyParams(params));
+    return searchParams.toString();
+}
+
 
 class FootballData {
 
@@ -48,11 +55,11 @@ class FootballData {
         area,
         plan
     } = {}) {
-        const searchParams = new URLSearchParams(deleteEmptyParams({
+
+        return this.instance.get(`/competitions?${requestParams({
             areas: area,
             plan
-        }));
-        return this.instance.get(`/competitions?${searchParams.toString()}`)
+        })}`)
     }
 
     competition(competitionId) {
@@ -63,20 +70,20 @@ class FootballData {
         season,
         stage
     } = {}) {
-        const searchParams = new URLSearchParams(deleteEmptyParams({
+
+        return this.instance.get(`/competitions/${competitionId}/teams?${requestParams({
             season,
             stage
-        }));
-        return this.instance.get(`/competitions/${competitionId}/teams?${searchParams.toString()}`)
+        })}`)
     }
 
     standings(competitionId, {
         standingType
     } = {}) {
-        const searchParams = new URLSearchParams(deleteEmptyParams({
+
+        return this.instance.get(`/competitions/${competitionId}/standings?${requestParams({
             standingType
-        }));
-        return this.instance.get(`/competitions/${competitionId}/standings?${searchParams.toString()}`)
+        })}`)
     }
 
     competitionMatches(competitionId, {
@@ -88,7 +95,8 @@ class FootballData {
         group,
         season
     } = {}) {
-        const searchParams = new URLSearchParams(deleteEmptyParams({
+
+        return this.instance.get(`/competitions/${competitionId}/matches?${requestParams({
             dateFrom,
             dateTo,
             stage,
@@ -96,8 +104,7 @@ class FootballData {
             matchday,
             group,
             season
-        }));
-        return this.instance.get(`/competitions/${competitionId}/matches?${searchParams.toString()}`)
+        })}`)
     }
 
     matches({
@@ -106,13 +113,13 @@ class FootballData {
         dateTo,
         status
     } = {}) {
-        const searchParams = new URLSearchParams(deleteEmptyParams({
+
+        return this.instance.get(`/matches?${requestParams({
             competitions,
             dateFrom,
             dateTo,
             status
-        }));
-        return this.instance.get(`/matches?${searchParams.toString()}`)
+        })}`)
     }
 
     match(id) {
@@ -126,14 +133,14 @@ class FootballData {
         venue,
         limit
     } = {}) {
-        const searchParams = new URLSearchParams(deleteEmptyParams({
+
+        return this.instance.get(`/teams/${id}/matches?${requestParams({
             dateFrom,
             dateTo,
             status,
             venue,
             limit
-        }));
-        return this.instance.get(`/teams/${id}/matches?${searchParams.toString()}`)
+        })}`)
     }
 
     team(id) {
@@ -155,25 +162,25 @@ class FootballData {
         status,
         limit
     } = {}) {
-        const searchParams = new URLSearchParams(deleteEmptyParams({
+
+        return this.instance.get(`/players/${id}/matches?${requestParams({
             competitions,
             dateFrom,
             dateTo,
             status,
             limit
-        }));
-        return this.instance.get(`/players/${id}/matches?${searchParams.toString()}`)
+        })}`)
     }
 
     scorers(competitionId, {
         limit,
         season
     } = {}) {
-        const searchParams = new URLSearchParams(deleteEmptyParams({
+
+        return this.instance.get(`/competitions/${competitionId}/scorers?${requestParams({
             limit,
             season
-        }));
-        return this.instance.get(`/competitions/${competitionId}/scorers?${searchParams.toString()}`)
+        })}`)
     }
 
 
