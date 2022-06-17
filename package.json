@@ -1,6 +1,6 @@
 {
-  "name": "football-data-v2",
-  "version": "1.0.12",
+  "name": "football-data-v4",
+  "version": "1.0.0",
   "description": "JS Api for using football-data.org rest api",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/dorraba/football-data-v2.git"
+    "url": "git+ssh://git@github.com/allthepies/football-data-v4.git"
   },
   "keywords": [
     "football-data"
@@ -16,11 +16,11 @@
   "author": "Dor Raba",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dorraba/football-data-v2/issues"
+    "url": "https://github.com/allthepies/football-data-v4/issues"
   },
-  "homepage": "https://github.com/dorraba/football-data-v2#readme",
+  "homepage": "https://github.com/allthepies/football-data-v4#readme",
   "dependencies": {
     "agentkeepalive": "^4.1.4",
-    "axios": "^0.22.0"
+    "axios": "^0.27.0"
   }
 }

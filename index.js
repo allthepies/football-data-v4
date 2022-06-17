@@ -41,7 +41,7 @@ class FootballData {
 
     constructor(token, timeout = 1000) {
         this.instance = axios.create({
-            baseURL: 'http://api.football-data.org/v2/',
+            baseURL: 'http://api.football-data.org/v4/',
             timeout: timeout,
             headers: {
                 'X-Auth-Token': token
