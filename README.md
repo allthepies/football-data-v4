@@ -1,5 +1,5 @@
-# football-data-v2
-Node js service for football-data.org V2 rest api
+# football-data-v4
+Node js service for football-data.org V4 rest api
 
 Very simple node package for interacting with the new football-data.org rest api
 

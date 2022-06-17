@@ -78,10 +78,12 @@ class FootballData {
     }
 
     standings(competitionId, {
+        season,
         standingType
     } = {}) {
 
         return this.instance.get(`/competitions/${competitionId}/standings?${requestParams({
+            season,
             standingType
         })}`)
     }
